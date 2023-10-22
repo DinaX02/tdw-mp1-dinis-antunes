@@ -6,6 +6,8 @@ import Layout from "../components/layout";
 import { getAllPostsForHome } from "../lib/api";
 import Head from "next/head";
 import { CMS_NAME } from "../lib/constants";
+import Link from "next/link";
+// import TesteProvisorio from "./testeProvisorio";
 
 export default function Index({ preview, allPosts }) {
   const heroPost = allPosts[0];
@@ -15,6 +17,7 @@ export default function Index({ preview, allPosts }) {
       <Layout preview={preview}>
         <Head>
           <title>Next.js Blog Example with {CMS_NAME}</title>
+        
         </Head>
         <Container>
           <Intro />
@@ -30,6 +33,7 @@ export default function Index({ preview, allPosts }) {
           )}
           {morePosts.length > 0 && <MoreStories posts={morePosts} />}
         </Container>
+         <Link href={"/testeProvisorio"}><p>Testar pagina</p></Link> 
       </Layout>
     </>
   );
