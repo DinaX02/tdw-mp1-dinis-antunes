@@ -6,15 +6,11 @@ name: Node.js CI
 on:
   pull_request:
     branches: ['main', 'new-feature']
-
+  schedule:
+    - cron: '0 0 * * *'  # dar trigger às 00:00 de todos os dias da semana
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    # strategy:
-    #   matrix:
-    #     node-version: [14.x, 16.x, 18.x]
-    #     # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
       - uses: actions/checkout@v3
