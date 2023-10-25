@@ -6,6 +6,8 @@ name: Node.js CI
 on:
   pull_request:
     branches: ['main', 'new-feature']
+  repository_dispatch:
+    types: [contentful.deploy]
   schedule:
     - cron: '0 0 * * *'  # dar trigger às 00:00 de todos os dias da semana
 jobs:
