@@ -29,7 +29,7 @@ jobs:
 
   deploy-direct:
     runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request' && github.event.pull_request.base.ref == 'main'
+    if: github.event_name == 'pull_request' && github.event.pull_request.base.ref == 'main' || github.event_name == 'schedule' || github.event_name == 'repository_dispatch'
     needs: [build]
 
     steps:
@@ -42,3 +42,7 @@ jobs:
       - run: npm install
       - run: npm run build
       - run: npx netlify-cli deploy --site ${{ secrets.NETLIFY_SITE_ID}} --auth ${{secrets.NETLIFY_AUTH_TOKEN}} --prod
+        env: 
+          CONTENTFUL_API_KEY: ${{ secrets.CONTENTFUL_API_KEY }}
+          CONTENTFUL_SPACE_ID: ${{ secrets.CONTENTFUL_SPACE_ID }}
+
