@@ -40,10 +40,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
       - run: npm install
-      - run: npm run build
-        env: 
-          CONTENTFUL_API_KEY: ${{ secrets.CONTENTFUL_API_KEY }}
-          CONTENTFUL_SPACE_ID: ${{ secrets.CONTENTFUL_SPACE_ID }}
+
+      - run:  ${{ secrets.CONTENTFUL_API_KEY }} ${{ secrets.CONTENTFUL_SPACE_ID }} npm run build
       - run: npx netlify-cli deploy --site ${{ secrets.NETLIFY_SITE_ID}} --auth ${{secrets.NETLIFY_AUTH_TOKEN}} --prod
 
 
