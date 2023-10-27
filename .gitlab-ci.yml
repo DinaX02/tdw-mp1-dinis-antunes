@@ -48,6 +48,9 @@ lint-test-job:   # This job also runs in the test stage.
 deploy-job:      # This job runs in the deploy stage.
   stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
   environment: production
+  variables:
+    CONTENTFUL_ACCESS_TOKEN: $CONTENTFUL_ACCESS_TOKEN
+    CONTENTFUL_SPACE_ID: $CONTENTFUL_SPACE_ID
   script:
     - npm run build
     - npx netlify-cli deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --prod
@@ -55,3 +58,4 @@ deploy-job:      # This job runs in the deploy stage.
   rules:
     - if: $CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_REF_NAME == "main"
     - if: $CI_PIPELINE_SOURCE == "schedule"
+    - if: $CI_PIPELINE_SOURCE == "trigger"
