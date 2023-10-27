@@ -17,29 +17,28 @@
 # https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Getting-Started.gitlab-ci.yml
 
 stages:          # List of stages for jobs, and their order of execution
-  - prettier
-  - test
+  - setup-inicial
   - deploy
 
 image: node:20.9.0
 
 before_script: npm install
 
-prettier-job:       # This job runs in the build stage, which runs first.
-  stage: prettier
+setup-inicial-job:       # This job runs in the build stage, which runs first.
+  stage: setup-inicial
   script:
     - npx prettier . --write
     - npx prettier . --check
 
-unit-test-job:   # This job runs in the test stage.
-  stage: test    # It only starts when the job in the build stage completes successfully.
+test-setup-inicial-job:   # This job runs in the test stage.
+  stage: setup-inicial    # It only starts when the job in the build stage completes successfully.
   script:
     - echo "Running unit tests.. Please wait :)"
     - npm run test
     - echo "test done"
 
-lint-test-job:   # This job also runs in the test stage.
-  stage: test    # It can run at the same time as unit-test-job (in parallel).
+lint-setup-inicial-job:   # This job also runs in the test stage.
+  stage: setup-inicial    # It can run at the same time as unit-test-job (in parallel).
   script:
     - echo "Linting code..."
     - npm run lint
