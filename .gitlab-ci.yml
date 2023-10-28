@@ -24,7 +24,7 @@ image: node:20.9.0
 
 before_script: npm install
 
-setup-inicial-job:       # This job runs in the build stage, which runs first.
+prettier-setup-inicial-job:       # This job runs in the build stage, which runs first.
   stage: setup-inicial
   script:
     - npx prettier . --write
